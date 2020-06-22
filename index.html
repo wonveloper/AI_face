@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Bootstrap Starter template 코드 시작 -->
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Jua&amp;display=swap" rel="stylesheet">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>캐릭터 닮은꼴 테스트</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- AddThis 시작-->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eeede0e1ff3698b"></script>
+    <!-- AddThis 끝-->
+
+    <!--favicon 코드 시작-->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <!--favicon 코드 끝-->
+
+</head>
+<!-- Bootstrap Starter template 코드 끝 -->
+
+<body>
+
+    <!-- 제플린 코드 시작 -->
+    <section class="section">
+        <h1 class="title">캐릭터 닮은꼴 테스트</h1>
+        <h3 class="subtitle">얼굴로 보는 인공지는 캐릭터 닮은꼴 테스트</h3>
+    </section>
+    <section class="developer">
+        <div class="container mt-5 devloper-cover d-flex flex-row-reverse">
+            <img src="img/youtube-copy.jpg" alt="" class="icon">
+            <a href="http://www.daejin.ac.kr/index.do?sso=ok" class="youtube-link">By fifteen</a>
+        </div>
+    </section>
+    <!-- 제플린 코드 끝 -->
+
+    <!-- Teachable Machine 코드 시작 -->
+
+    <!-- 예측 버튼 만들기 -->
+
+    <!-- CodePeb HTML 시작 -->
+    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <div class="container file-upload">
+
+        <div class="image-upload-wrap">
+            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+            <div class="drag-text">
+
+                <img src="img/upload.svg" class="mt-5 pt-5 upload" style="width: 20%;">
+
+                <h3 class="mb-5 pt-4 pb-5 upload-text">얼굴 사진을 올려놓거나 눌러서 업로드하세요!</h3>
+            </div>
+        </div>
+        <div class="file-upload-content">
+            <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+            <div id="loading">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <p class="text-center">AI가 당신의 얼굴을 분석중입니다.</p>
+            </div>
+            <p class="result-message"></p>
+            <p id="result-image"></p>
+            <div id="label-container"></div>
+
+            <!-- AddThis 코드 시작 -->
+            <div class="addthis_inline_share_toolbox_t6s7"></div>
+            <!-- AddThis 코드 끝 -->
+
+            <div class="image-title-wrap">
+                <button type="button" onclick="removeUpload()" class="remove-image">다시하기</button>
+            </div>
+        </div>
+    </div>
+    <!-- CodePen HTML 끝 -->
+
+    <!--   Teachable Machine 코드 시작   -->
+    <div id="webcam-container"></div>
+    <div id="label-container"></div>
+
+    <!-- DISQUS 코드 시작 -->
+
+    <!-- <div id="disqus_thread"></div>
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        /*
+        var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        */
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document,
+                s = d.createElement('script');
+            s.src = 'https://fifteen-1.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the
+        <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript> -->
+
+    <!-- DISQUS 코드 끝 -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+
+    <!-- Optional JavaScript 시작 -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <!-- Optional JavaScript 끝 -->
+
+    <!-- CodePeb JS 시작 -->
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('.image-upload-wrap').hide();
+                    $('#loading').show();
+                    $('.file-upload-image').attr('src', e.target.result);
+                    $('.file-upload-content').show();
+                    $('.image-title').html(input.files[0].name);
+                };
+                reader.readAsDataURL(input.files[0]);
+                init().then(() => {
+                    console.log("");
+                    predict();
+                    $('#loading').hide();
+                });
+            } else {
+                removeUpload();
+            }
+        }
+
+        function removeUpload() {
+            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+            $('.file-upload-content').hide();
+            $('.image-upload-wrap').show();
+            $('#result-image').empty();
+            $('.result-message').empty();
+            window.location.reload();
+        }
+        $('.image-upload-wrap').bind('dragover', function() {
+            $('.image-upload-wrap').addClass('image-dropping');
+        });
+        $('.image-upload-wrap').bind('dragleave', function() {
+            $('.image-upload-wrap').removeClass('image-dropping');
+        });
+    </script>
+    <!-- CodePeb JS 끝 -->
+
+    <!-- Teachable Machine 코드 시작 -->
+    <script type="text/javascript">
+        // More API functions here:
+        // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+        // the link to your model provided by Teachable Machine export panel
+        const URL = "https://teachablemachine.withgoogle.com/models/hR6It3FdQ/";
+        let model, webcam, labelContainer, maxPredictions;
+        // Load the image model and setup the webcam
+        async function init() {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+            // load the model and metadata
+            // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+            // or files from your local hard drive
+            // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+            labelContainer = document.getElementById("label-container");
+            for (let i = 0; i < maxPredictions; i++) { // and class labels
+                labelContainer.appendChild(document.createElement("div"));
+            }
+        }
+        // run the webcam image through the image model
+        async function predict() {
+            // predict can take in an image, video or canvas html element
+            var image = document.getElementById("face-image")
+            const prediction = await model.predict(image, false);
+            prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+            console.log(prediction[0].className);
+            //             메시지 코드 시작
+            var resultMessage;
+            switch (prediction[0].className) {
+                case "_1":
+                    resultMessage = "가루"
+                    break;
+                case "_2":
+                    resultMessage = "그로밋"
+                    break;
+                case "_3":
+                    resultMessage = "그루시"
+                    break;
+                case "_4":
+                    resultMessage = "까칠이"
+                    break;
+                case "_5":
+                    resultMessage = "꼬부기"
+                    break;
+                case "_6":
+                    resultMessage = "나루토"
+                    break;
+                case "_7":
+                    resultMessage = "닉"
+                    break;
+                case "_8":
+                    resultMessage = "도라도라"
+                    break;
+                case "_9":
+                    resultMessage = "도라에몽"
+                    break;
+                case "_10":
+                    resultMessage = "둘리"
+                    break;
+                case "_11":
+                    resultMessage = "라푼젤"
+                    break;
+                case "_12":
+                    resultMessage = "랄프"
+                    break;
+                case "_13":
+                    resultMessage = "루피"
+                    break;
+                case "_14":
+                    resultMessage = "매트"
+                    break;
+                case "_15":
+                    resultMessage = "메가맨"
+                    break;
+                case "_16":
+                    resultMessage = "모아나"
+                    break;
+                case "_17":
+                    resultMessage = "미구엘"
+                    break;
+                case "_18":
+                    resultMessage = "미키마우스"
+                    break;
+                case "_19":
+                    resultMessage = "바넬로피"
+                    break;
+                case "_20":
+                    resultMessage = "밥"
+                    break;
+                case "_21":
+                    resultMessage = "버즈"
+                    break;
+                case "_22":
+                    resultMessage = "브랜치"
+                    break;
+                case "_23":
+                    resultMessage = "뽀로로"
+                    break;
+                case "_24":
+                    resultMessage = "설리"
+                    break;
+                case "_25":
+                    resultMessage = "손오공"
+                    break;
+                case "_26":
+                    resultMessage = "슈렉"
+                    break;
+                case "_27":
+                    resultMessage = "슈퍼마리오"
+                    break;
+                case "_28":
+                    resultMessage = "스폰지밥"
+                    break;
+                case "_29":
+                    resultMessage = "신비"
+                    break;
+                case "_30":
+                    resultMessage = "심슨"
+                    break;
+                case "_31":
+                    resultMessage = "안톤이고"
+                    break;
+                case "_32":
+                    resultMessage = "알프레도"
+                    break;
+                case "_33":
+                    resultMessage = "엘사"
+                    break;
+                case "_34":
+                    resultMessage = "우디"
+                    break;
+                case "_35":
+                    resultMessage = "울라프"
+                    break;
+                case "_36":
+                    resultMessage = "인조인간18호"
+                    break;
+                case "_37":
+                    resultMessage = "자두"
+                    break;
+                case "_38":
+                    resultMessage = "제리"
+                    break;
+                case "_39":
+                    resultMessage = "주디"
+                    break;
+                case "_40":
+                    resultMessage = "징징이"
+                    break;
+                case "_41":
+                    resultMessage = "짱구"
+                    break;
+                case "_42":
+                    resultMessage = "쵸파"
+                    break;
+                case "_43":
+                    resultMessage = "칼프레드릭슨"
+                    break;
+                case "_44":
+                    resultMessage = "캐스퍼"
+                    break;
+                case "_45":
+                    resultMessage = "커비"
+                    break;
+                case "_46":
+                    resultMessage = "코난"
+                    break;
+                case "_47":
+                    resultMessage = "태일"
+                    break;
+                case "_48":
+                    resultMessage = "토토로"
+                    break;
+                case "_49":
+                    resultMessage = "패트"
+                    break;
+                case "_50":
+                    resultMessage = "포"
+                    break;
+                case "_51":
+                    resultMessage = "피노키오"
+                    break;
+                case "_52":
+                    resultMessage = "피카츄"
+                    break;
+                case "_53":
+                    resultMessage = "호빵맨"
+                    break;
+                default:
+                    resultMessage = "알수없음"
+                    // case "가루":
+                    //     resultMessage = "가루"
+                    //     break;
+                    // case "그로밋":
+                    //     resultMessage = "그로밋"
+                    //     break;
+                    // case "그루시":
+                    //     resultMessage = "그루시"
+                    //     break;
+                    // case "까칠이":
+                    //     resultMessage = "까칠이"
+                    //     break;
+                    // case "꼬부기":
+                    //     resultMessage = "꼬부기"
+                    //     break;
+                    // case "나루토":
+                    //     resultMessage = "나루토"
+                    //     break;
+                    // case "닉":
+                    //     resultMessage = "닉"
+                    //     break;
+                    // case "도라도라":
+                    //     resultMessage = "도라도라"
+                    //     break;
+                    // case "도라에몽":
+                    //     resultMessage = "도라에몽"
+                    //     break;
+                    // case "둘리":
+                    //     resultMessage = "둘리"
+                    //     break;
+                    // case "라푼젤":
+                    //     resultMessage = "라푼젤"
+                    //     break;
+                    // case "랄프":
+                    //     resultMessage = "랄프"
+                    //     break;
+                    // case "루피":
+                    //     resultMessage = "루피"
+                    //     break;
+                    // case "매트":
+                    //     resultMessage = "매트"
+                    //     break;
+                    // case "메가맨":
+                    //     resultMessage = "메가맨"
+                    //     break;
+                    // case "모아나":
+                    //     resultMessage = "모아나"
+                    //     break;
+                    // case "미구엘":
+                    //     resultMessage = "미구엘"
+                    //     break;
+                    // case "미키마우스":
+                    //     resultMessage = "미키마우스"
+                    //     break;
+                    // case "바넬로피":
+                    //     resultMessage = "바넬로피"
+                    //     break;
+                    // case "밥":
+                    //     resultMessage = "밥"
+                    //     break;
+                    // case "버즈":
+                    //     resultMessage = "버즈"
+                    //     break;
+                    // case "브랜치":
+                    //     resultMessage = "브랜치"
+                    //     break;
+                    // case "뽀로로":
+                    //     resultMessage = "뽀로로"
+                    //     break;
+                    // case "설리":
+                    //     resultMessage = "설리"
+                    //     break;
+                    // case "손오공":
+                    //     resultMessage = "손오공"
+                    //     break;
+                    // case "슈렉":
+                    //     resultMessage = "슈렉"
+                    //     break;
+                    // case "슈퍼마리오":
+                    //     resultMessage = "슈퍼마리오"
+                    //     break;
+                    // case "스폰지밥":
+                    //     resultMessage = "스폰지밥"
+                    //     break;
+                    // case "신비":
+                    //     resultMessage = "신비"
+                    //     break;
+                    // case "심슨":
+                    //     resultMessage = "심슨"
+                    //     break;
+                    // case "안톤이고":
+                    //     resultMessage = "안톤이고"
+                    //     break;
+                    // case "알프레도":
+                    //     resultMessage = "알프레도"
+                    //     break;
+                    // case "엘사":
+                    //     resultMessage = "엘사"
+                    //     break;
+                    // case "우디":
+                    //     resultMessage = "우디"
+                    //     break;
+                    // case "울라프":
+                    //     resultMessage = "울라프"
+                    //     break;
+                    // case "인조인간18호":
+                    //     resultMessage = "인조인간18호"
+                    //     break;
+                    // case "자두":
+                    //     resultMessage = "자두"
+                    //     break;
+                    // case "제리":
+                    //     resultMessage = "제리"
+                    //     break;
+                    // case "주디":
+                    //     resultMessage = "주디"
+                    //     break;
+                    // case "징징이":
+                    //     resultMessage = "징징이"
+                    //     break;
+                    // case "짱구":
+                    //     resultMessage = "짱구"
+                    //     break;
+                    // case "쵸파":
+                    //     resultMessage = "쵸파"
+                    //     break;
+                    // case "칼프레드릭슨":
+                    //     resultMessage = "칼프레드릭슨"
+                    //     break;
+                    // case "캐스퍼":
+                    //     resultMessage = "캐스퍼"
+                    //     break;
+                    // case "커비":
+                    //     resultMessage = "커비"
+                    //     break;
+                    // case "코난":
+                    //     resultMessage = "코난"
+                    //     break;
+                    // case "태일":
+                    //     resultMessage = "태일"
+                    //     break;
+                    // case "토토로":
+                    //     resultMessage = "토토로"
+                    //     break;
+                    // case "패트":
+                    //     resultMessage = "패트"
+                    //     break;
+                    // case "포":
+                    //     resultMessage = "포"
+                    //     break;
+                    // case "피노키오":
+                    //     resultMessage = "피노키오"
+                    //     break;
+                    // case "피카츄":
+                    //     resultMessage = "피카츄"
+                    //     break;
+                    // case "호빵맨":
+                    //     resultMessage = "호빵맨"
+                    //     break;
+                    // default:
+                    //     resultMessage = "알수없음"
+            }
+            $('.result-message').html(resultMessage);
+            var myImage = new Image(200, 200);
+            myImage.src = prediction[0].className + ".png";
+            var resultImage = document.getElementById('result-image').appendChild(myImage);
+            const classPrediction =
+                "닮은 점수 : " + prediction[0].probability.toFixed(2) * 100 + "%";
+            labelContainer.childNodes[0].innerHTML = classPrediction;
+        }
+    </script>
+    <!-- Teachable Machine 코드 끝 -->
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">© fifteen 2020. All Rights Reserved.</p>
+    </footer>
+</body>
+
+<!-- Copyright (c) 2020 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
+
+</html>

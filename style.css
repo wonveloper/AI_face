@@ -1,0 +1,220 @@
+/* CodePen 코드 시작 */
+body {
+  font-family: 'Jua', sans-serif;
+  background-color: #ffffff;
+}
+
+.file-upload {
+  padding: 13% 3%;
+  border-radius: 10px;
+  border: solid 1.5px #f6f7fa;
+  background-color: #f6f7fa;
+}
+
+.file-upload-btn {
+  width: 100%;
+  margin: 0;
+  color: #fff;
+  background: #1FB264;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #15824B;
+  transition: all .2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.file-upload-btn:hover {
+  background: #1AA059;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.file-upload-btn:active {
+  border: 0;
+  transition: all .2s ease;
+}
+
+.file-upload-content {
+  display: none;
+  text-align: center;
+}
+
+.file-upload-input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-upload-wrap {
+  margin-top: 20px;
+  position: relative;
+  object-fit: contain;
+  border-radius: 10px;
+  border: dashed 1.5px #35465d;
+  background-color: #ffffff;
+  width: 57%;
+  margin: 0 auto;
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+  background-color:  rgba(0, 0, 255, 0.1);
+  border: 1.5px dashed #ffffff;
+}
+
+.image-title-wrap {
+  padding: 0 15px 15px 15px;
+  color: #222;
+}
+
+.drag-text {
+  text-align: center;
+}
+
+.drag-text h3 {
+  font-weight: 100;
+  text-transform: uppercase;
+}
+
+.file-upload-image {
+  max-height: 524px;
+  max-width: 403px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* 다시하기 버튼 크기 */
+.remove-image {
+  border-radius: 40px;
+  border: solid 1.5px #35465d;
+  background-color: #35465d;
+  font-family: NanumSquareB;
+  font-size: 1.5rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.remove-image:hover {
+  background: green;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.remove-image:active {
+  border: 0;
+  transition: all .2s ease;
+}
+/* CodePen 코드 끝 */
+
+/* Zeplin 코드 시작 */
+.nav-distance {
+    padding: 2.1% 7.7%;   
+}
+.navbar-light .navbar-brand {
+    font-family: NanumSquareR;
+    line-height: 1.68;
+    text-align: left;
+    color: #35465d;
+}
+
+.navbar-light .navbar-toggler {
+    border-color: #ffffff;
+}
+.section {
+    margin-top: 100px;
+}
+.title {
+    font-family: 'Jua', sans-serif;
+    line-height: 1.67;
+    text-align: center;
+    color: #35465d;
+}
+.subtitle {
+    font-family: 'Jua', sans-serif;
+    line-height: 1.53;
+    text-align: center;
+    color: #35465d;
+}
+
+/* 미디어쿼리 코드 시작 */
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 10px;
+  }
+    .navbar-brand {
+        font-size: 2rem;
+    }
+}
+/* 미디어쿼리 코드 끝 */
+
+.youtube-link {
+    font-family: 'Jua', sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.71;
+    text-align: center;
+    color: black;
+    text-decoration: underline;
+}
+.youtube-link:hover {
+    font-family: 'Jua', sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.71;
+    text-align: center;
+    color: #f73737;
+    text-decoration: underline;
+}
+.icon {
+    width: 8%;
+}
+.upload-text {
+  font-family: 'Jua', sans-serif;
+  font-size: 1.53rem;
+  line-height: 1.53;
+  text-align: center;
+  color: #35465d;
+  width: 50%;
+  margin: 0 auto;
+}
+/* Zeplin 코드 끝 */
+
+/* 공유 버튼 크기 */
+.addthis_inline_share_toolbox_t6s7 {
+    margin-bottom: 20px;
+}
+
+.result-message {
+    font-family: 'Jua', sans-serif;
+    font-size: 33px;
+    font-weight: normal;
+    font-stretch: normal;
+}
+#label-container {
+    font-family: 'Jua', sans-serif;
+    font-size: 1.53rem;
+    font-weight: normal;
+    font-stretch: normal;
+}
+.footer {
+    background-color: initial;
+    color: initial;
+}
+.footer-text {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
