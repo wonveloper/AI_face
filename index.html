@@ -37,7 +37,7 @@
     </section>
     <section class="developer">
         <div class="container mt-5 devloper-cover d-flex flex-row-reverse">
-            <a href="http://www.daejin.ac.kr/index.do?sso=ok" class="youtube-link">By.fifteen</a>
+            <a href="www.daejin.ac.kr" class="youtube-link">By.fifteen</a>
         </div>
     </section>
     <!-- 제플린 코드 끝 -->
@@ -67,7 +67,7 @@
                 </div>
                 <p class="text-center">AI가 당신의 얼굴을 분석중입니다.</p>
             </div>
-            <p class="result-message"></p>
+            <!-- <p class="result-message"></p> -->
             <p id="result-image"></p>
             <div id="label-container"></div>
 
@@ -168,7 +168,8 @@
         // More API functions here:
         // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
         // the link to your model provided by Teachable Machine export panel
-        const URL = "https://teachablemachine.withgoogle.com/models/hR6It3FdQ/";
+        // backup const URL = "https://teachablemachine.withgoogle.com/models/hR6It3FdQ/"
+        const URL = "https://teachablemachine.withgoogle.com/models/JvKOC9xLi/";
         let model, webcam, labelContainer, maxPredictions;
         // Load the image model and setup the webcam
         async function init() {
@@ -196,85 +197,85 @@
             var resultMessage;
             switch (prediction[0].className) {
                 case "_1":
-                    resultMessage = "가루"
+                    resultMessage = "쿵푸팬더"
                     break;
                 case "_2":
-                    resultMessage = "그로밋"
+                    resultMessage = "피카츄"
                     break;
                 case "_3":
-                    resultMessage = "그루시"
-                    break;
-                case "_4":
-                    resultMessage = "까칠이"
-                    break;
-                case "_5":
-                    resultMessage = "꼬부기"
-                    break;
-                case "_6":
-                    resultMessage = "나루토"
-                    break;
-                case "_7":
-                    resultMessage = "닉"
-                    break;
-                case "_8":
-                    resultMessage = "도라도라"
-                    break;
-                case "_9":
-                    resultMessage = "도라에몽"
-                    break;
-                case "_10":
-                    resultMessage = "둘리"
-                    break;
-                case "_11":
-                    resultMessage = "라푼젤"
-                    break;
-                case "_12":
-                    resultMessage = "랄프"
-                    break;
-                case "_13":
                     resultMessage = "루피"
                     break;
-                case "_14":
-                    resultMessage = "매트"
+                case "_4":
+                    resultMessage = "스폰지밥"
                     break;
-                case "_15":
-                    resultMessage = "메가맨"
+                case "_5":
+                    resultMessage = "짱구"
                     break;
-                case "_16":
-                    resultMessage = "모아나"
-                    break;
-                case "_17":
-                    resultMessage = "미구엘"
-                    break;
-                case "_18":
-                    resultMessage = "미키마우스"
-                    break;
-                case "_19":
-                    resultMessage = "바넬로피"
-                    break;
-                case "_20":
-                    resultMessage = "밥"
-                    break;
-                case "_21":
-                    resultMessage = "버즈"
-                    break;
-                case "_22":
-                    resultMessage = "브랜치"
-                    break;
-                case "_23":
-                    resultMessage = "뽀로로"
-                    break;
-                case "_24":
-                    resultMessage = "설리"
-                    break;
-                case "_25":
-                    resultMessage = "손오공"
-                    break;
-                case "_26":
-                    resultMessage = "슈렉"
-                    break;
-                case "_27":
-                    resultMessage = "슈퍼마리오"
+                //case "_6":
+                    //resultMessage = "나루토"
+                    //break;
+                //case "_7":
+                    //resultMessage = "닉"
+                    //break;
+                //case "_8":
+                    //resultMessage = "도라도라"
+                    //break;
+                //case "_9":
+                    //resultMessage = "도라에몽"
+                    //break;
+                //case "_10":
+                    //resultMessage = "둘리"
+                    //break;
+                //case "_11":
+                    //resultMessage = "라푼젤"
+                    //break;
+                //case "_12":
+                    //resultMessage = "랄프"
+                    //break;
+                //case "_13":
+                    //resultMessage = "루피"
+                    //break;
+                //case "_14":
+                    //resultMessage = "매트"
+                    //break;
+                //case "_15":
+                    //resultMessage = "메가맨"
+                    //break;
+                //case "_16":
+                    //resultMessage = "모아나"
+                    //break;
+                //case "_17":
+                    //resultMessage = "미구엘"
+                    //break;
+                //case "_18":
+                    //resultMessage = "미키마우스"
+                    //break;
+                //case "_19":
+                    //resultMessage = "바넬로피"
+                    //break;
+                //case "_20":
+                    //resultMessage = "밥"
+                    //break;
+                //case "_21":
+                    //resultMessage = "버즈"
+                    //break;
+                //case "_22":
+                    //resultMessage = "브랜치"
+                    //break;
+                //case "_23":
+                    //resultMessage = "뽀로로"
+                    //break;
+                //case "_24":
+                    //resultMessage = "설리"
+                    //break;
+                //case "_25":
+                    //resultMessage = "손오공"
+                    //break;
+                //case "_26":
+                    //resultMessage = "슈렉"
+                    //break;
+                //case "_27":
+                   /*resultMessage = "슈퍼마리오"
                     break;
                 case "_28":
                     resultMessage = "스폰지밥"
@@ -516,7 +517,7 @@
                     //     resultMessage = "호빵맨"
                     //     break;
                     // default:
-                    //     resultMessage = "알수없음"
+                    //     resultMessage = "알수없음"*/
             }
             $('.result-message').html(resultMessage);
             var myImage = new Image(200, 200);
